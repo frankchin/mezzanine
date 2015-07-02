@@ -24,7 +24,7 @@ msgstr "其他文章"
 
 #: defaults.py:21
 msgid "Enable featured images in blog posts"
-msgstr "在部落格文章中使用封面圖片"
+msgstr "在最新消息文章中使用封面圖片"
 
 #: defaults.py:36
 msgid "Blog post URL date format"
@@ -50,17 +50,17 @@ msgstr "文章列表頁中顯示的文章數量。"
 
 #: defaults.py:57
 msgid "Blog posts RSS limit"
-msgstr "部落格文章 RSS 上限"
+msgstr "最新消息文章 RSS 上限"
 
 #: defaults.py:58
 msgid ""
 "Number of most recent blog posts shown in the RSS feed. Set to ``None`` to "
 "display all blog posts in the RSS feed."
-msgstr "RSS feed 中顯示的最近部落格文章數量。若設置為 ``None``，RSS feed 中將包含所有部落格文章。"
+msgstr "RSS feed 中顯示的最近最新消息文章數量。若設置為 ``None``，RSS feed 中將包含所有最新消息文章。"
 
 #: defaults.py:66
 msgid "Slug of the page object for the blog."
-msgstr "部落格頁面物件的網址"
+msgstr "最新消息頁面物件的網址"
 
 #: models.py:17 templates/blog/includes/filter_panel.html:35
 msgid "Categories"
@@ -89,11 +89,11 @@ msgstr "相關文章"
 
 #: models.py:32
 msgid "Blog post"
-msgstr "部落格文章"
+msgstr "最新消息文章"
 
 #: models.py:33
 msgid "Blog posts"
-msgstr "部落格文章"
+msgstr "最新消息文章"
 
 #: models.py:93
 msgid "Blog Category"
@@ -145,7 +145,7 @@ msgstr "分享至 Facebook"
 
 #: templates/blog/blog_post_list.html:4 templates/blog/blog_post_list.html:22
 msgid "Blog"
-msgstr "部落格"
+msgstr "最新消息"
 
 #: templates/blog/blog_post_list.html:31
 msgid "Tag:"
