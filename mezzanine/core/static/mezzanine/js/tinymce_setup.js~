@@ -81,7 +81,6 @@ jQuery(function($) {
              
              verify_html : false,
              cleanup : false,
-				 cleanup_on_startup : false,
              
              file_browser_callback: function(field_name, url, type, win) {
                if(type=='image') {

@@ -28,7 +28,7 @@
     window.__admin_menu_collapsed = {{ settings.ADMIN_MENU_COLLAPSED|default:"false"|lower }};
     window.__language_code = '{{ LANGUAGE_CODE }}';
 </script>
-<script src="{% static 'boyun/js/boyunAdmin.js' %}"></script>
+sdfsd
 {% if not settings.GRAPPELLI_INSTALLED %}
 <script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
 {% endif %}
