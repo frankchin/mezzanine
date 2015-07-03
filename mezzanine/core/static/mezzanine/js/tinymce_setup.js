@@ -56,6 +56,7 @@ function custom_file_browser(field_name, url, type, win) {
     return false;
 }
 
+var first = true;
 jQuery(function($) {
 
     if (typeof tinyMCE != 'undefined') {
@@ -77,15 +78,22 @@ jQuery(function($) {
                ed.on('init', function() {
                  this.getDoc().body.style.fontSize = '12px'; <!---字體預設大小---!>
                });
-             },
-             
-             verify_html : false,
-             cleanup : false,
-				 cleanup_on_startup : false,
+             },           
              
              file_browser_callback: function(field_name, url, type, win) {
                if(type=='image') {
-    	      	  $('body').append('<input id=selectFile type=file >');
+               	if (first){
+               		$('body').append('<input id=selectFile type=file >');
+                 		var input = "[id^='tinymce-'][id$='-inp']";
+    	      	      var a = "<script>$('#selectFile').on('change', function() {\
+    	      	           uploadToS3('news/abc.png', 'selectFile', '/moderna/signS3/', function(){\
+    	      	  			  $(\"" + input + "\").attr({'value':'https://isccyut2.s3.amazonaws.com/news/abc.png'});\
+    	      	  			  });\
+    	      	  			});</script>";	  
+    	      	    $('body').append(a);
+    	      	    first = false;
+               	}          	
+    	      	  
                  $('#selectFile').click();
                }
              }
@@ -116,3 +124,4 @@ jQuery(function($) {
     }
 
 });
+    	      	

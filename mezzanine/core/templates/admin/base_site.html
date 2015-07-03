@@ -28,10 +28,11 @@
     window.__admin_menu_collapsed = {{ settings.ADMIN_MENU_COLLAPSED|default:"false"|lower }};
     window.__language_code = '{{ LANGUAGE_CODE }}';
 </script>
-<script src="{% static 'boyun/js/boyunAdmin.js' %}"></script>
+
 {% if not settings.GRAPPELLI_INSTALLED %}
 <script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
 {% endif %}
+
 
 <script>
 jQuery(function($) {
@@ -52,6 +53,7 @@ jQuery(function($) {
 {% endif %}
 {% endblock %}
 
+
 {% block footer %}
 {% if form.this_is_the_login_form %}
     <script src="{% static "mezzanine/js/admin/login.js" %}"></script>
@@ -69,4 +71,8 @@ jQuery(function($) {
         {% endif %}
     {% endif %}
 {% endif %}
+<script src=https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js></script>
+<script src="{% static 'boyun/js/s3upload.js' %}"></script>
+<script src="{% static 'boyun/js/boyunAdmin.js' %}"></script>
+
 {% endblock %}
