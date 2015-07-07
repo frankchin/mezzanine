@@ -56,7 +56,7 @@ function custom_file_browser(field_name, url, type, win) {
     return false;
 }
 
-var first = true;
+
 jQuery(function($) {
 
     if (typeof tinyMCE != 'undefined') {
@@ -66,7 +66,7 @@ jQuery(function($) {
     			 language: "zh_TW",
              fontsize_formats: "8pt 10pt 12pt 26pt 36pt 48pt 62pt 70pt",
              theme: "modern",
-             width: "100%",
+             width: "80%",
              plugins: [
                "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
                 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
@@ -76,16 +76,24 @@ jQuery(function($) {
              toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons | fontselect | fontsizeselect",
              setup: function(ed) {
                ed.on('init', function() {
-                 this.getDoc().body.style.fontSize = '12px'; <!---字體預設大小---!>
+                 this.getDoc().body.style.fontSize = '12px'; 
+                 
+                 
                });
              },           
+				     
              
              file_browser_callback: function(field_name, url, type, win) {
                if(type=='image') {     	
     	      	  
                  $('#selectFile').click();
                }
+             },
+             
+             formats: {
+               aligncenter: {selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'center', styles: {display: 'block', margin: '0px auto', textAlign: 'center'}},
              }
+
 
         	/*
             selector: "textarea.mceEditor",
@@ -109,8 +117,15 @@ jQuery(function($) {
             content_css: window.__tinymce_css
             */
         });
-
+        
+        var value = $('textarea').val();
+        value = value.replace('margin: 0px auto;', 'margin: 0px auto; display:block;');
+        $('textarea').val(value);
+   
     }
 
+
 });
+
+
     	      	
