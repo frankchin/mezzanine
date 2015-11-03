@@ -97,7 +97,8 @@ def set_dynamic_settings(s):
     s.setdefault("MESSAGE_STORAGE", storage)
 
     # If required, add django-modeltranslation for both tests and deployment
-    if not s.get("USE_MODELTRANSLATION", False):
+    if not s.get("USE_MODELTRANSLATION", False) or s["TESTING"]:
+        s["USE_MODELTRANSLATION"] = False
         remove("INSTALLED_APPS", "modeltranslation")
     else:
         try:
@@ -131,11 +132,13 @@ def set_dynamic_settings(s):
         remove("INSTALLED_APPS", "django_extensions")
 
     if "debug_toolbar" in s["INSTALLED_APPS"]:
+        # We need to configure debug_toolbar manually otherwise it
+        # breaks in conjunction with modeltranslation. See the
+        # "Explicit setup" section in debug_toolbar docs for more info.
+        s["DEBUG_TOOLBAR_PATCH_SETTINGS"] = False
         debug_mw = "debug_toolbar.middleware.DebugToolbarMiddleware"
         append("MIDDLEWARE_CLASSES", debug_mw)
-        # Ensure debug_toolbar is before modeltranslation to avoid
-        # races for configuration.
-        move("INSTALLED_APPS", "debug_toolbar", 0)
+        s.setdefault("INTERNAL_IPS", ("127.0.0.1",))
 
     # If compressor installed, ensure it's configured and make
     # Mezzanine's settings available to its offline context,
@@ -208,7 +211,9 @@ def set_dynamic_settings(s):
     # becomes inaccessible.
     mw = "django.middleware.locale.LocaleMiddleware"
     if s["USE_I18N"] and mw not in s["MIDDLEWARE_CLASSES"]:
-        prepend("MIDDLEWARE_CLASSES", mw)
+        session = s["MIDDLEWARE_CLASSES"].index(
+            "django.contrib.sessions.middleware.SessionMiddleware")
+        s["MIDDLEWARE_CLASSES"].insert(session + 1, mw)
 
     # Revert tuple settings back to tuples.
     for setting in tuple_list_settings:

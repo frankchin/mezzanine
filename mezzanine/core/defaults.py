@@ -201,7 +201,7 @@ register_setting(
     description=_("Name of the jQuery file found in "
                   "mezzanine/core/static/mezzanine/js/"),
     editable=False,
-    default="jquery-1.7.2.min.js",
+    default="jquery-1.8.3.min.js",
 )
 
 register_setting(
@@ -210,7 +210,7 @@ register_setting(
     description=_("Name of the jQuery UI file found in "
                   "mezzanine/core/static/mezzanine/js/"),
     editable=False,
-    default="jquery-ui-1.8.2.min.js",
+    default="jquery-ui-1.8.24.min.js",
 )
 
 register_setting(
@@ -290,8 +290,9 @@ register_setting(
     description=_("List of inline CSS styles that won't be stripped from "
         "``RichTextField`` instances."),
     editable=False,
-    default=("margin-top", "margin-bottom", "margin-left", "margin-right",
-        "float", "vertical-align", "border", "margin"),
+    default=("border", "display", "float", "list-style-type", "margin",
+        "margin-bottom", "margin-left", "margin-right", "margin-top",
+        "padding-left", "text-align", "text-decoration", "vertical-align"),
 )
 
 register_setting(

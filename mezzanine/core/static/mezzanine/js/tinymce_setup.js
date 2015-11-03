@@ -12,13 +12,13 @@ var language_codes = {
     'es': 'es',
     'et': 'et',
     'fa': 'fa',
-    'fa_IR': 'fa_IR',
+    'fa-ir': 'fa_IR',
     'fi': 'fi',
     'fr': 'fr_FR',
-    'hr_HR': 'hr',
+    'hr-hr': 'hr',
     'hu': 'hu_HU',
-    'id_ID': 'id',
-    'is_IS': 'is_IS',
+    'id-id': 'id',
+    'is-is': 'is_IS',
     'it': 'it',
     'ja': 'ja',
     'ko': 'ko_KR',
@@ -26,17 +26,19 @@ var language_codes = {
     'nb': 'nb_NO',
     'nl': 'nl',
     'pl': 'pl',
-    'pt_BR': 'pt_BR',
-    'pt_PT': 'pt_PT',
+    'pt-br': 'pt_BR',
+    'pt-pt': 'pt_PT',
     'ru': 'ru',
     'sk': 'sk',
-    'sr': 'sr_Latn',
+    'sr': 'sr',
     'sv': 'sv_SE',
     'tr': 'tr',
     'uk': 'uk_UA',
     'vi': 'vi',
-    'zh_CN': 'zh_CN',
-    'zh_TW': 'zh_TW'
+    'zh-cn': 'zh_CN',
+    'zh-tw': 'zh_TW',
+    'zh-hant': 'zh_TW',
+    'zh-hans': 'zh_CN'
 };
 
 function custom_file_browser(field_name, url, type, win) {
@@ -56,7 +58,6 @@ function custom_file_browser(field_name, url, type, win) {
     return false;
 }
 
-
 jQuery(function($) {
 
     if (typeof tinyMCE != 'undefined') {
@@ -67,65 +68,28 @@ jQuery(function($) {
              fontsize_formats: "8pt 10pt 12pt 26pt 36pt 48pt 62pt 70pt",
              theme: "modern",
              width: "80%",
+             height: "600",
              plugins: [
-               "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+               "advlist autolink link image  lists charmap print preview hr anchor pagebreak spellchecker",
                 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
                 "save table contextmenu directionality emoticons template paste textcolor"
              ],
-             content_css: "css/content.css",
+
              toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons | fontselect | fontsizeselect",
              setup: function(ed) {
                ed.on('init', function() {
                  this.getDoc().body.style.fontSize = '12px'; 
-                 
-                 
                });
-             },           
-				     
-             
+             },
+ 
              file_browser_callback: function(field_name, url, type, win) {
                if(type=='image') {     	
-    	      	  
                  $('#selectFile').click();
                }
-             },
-             
-             formats: {
-               aligncenter: {selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'center', styles: {display: 'block', margin: '0px auto', textAlign: 'center'}},
              }
-
-
-        	/*
-            selector: "textarea.mceEditor",
-            height: '500px',
-            language: 'zh_TW',
-            plugins: [
-                "advlist autolink lists link image charmap print preview anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table contextmenu paste"
-            ],
-            link_list: '/displayable_links.js',
-            relative_urls: false,
-            convert_urls: false,
-            menubar: false,
-            statusbar: false,
-            toolbar: ("insertfile undo redo | styleselect | bold italic | " +
-                      "alignleft aligncenter alignright alignjustify | " +
-                      "bullist numlist outdent indent | link image table | " +
-                      "code fullscreen"),
-            file_browser_callback: custom_file_browser,
-            content_css: window.__tinymce_css
-            */
         });
-        
-        var value = $('textarea').val();
-        value = value.replace('margin: 0px auto;', 'margin: 0px auto; display:block; text-align: center;');
-        $('textarea').val(value);
-   
-    }
 
+    }
 
 });
 
-
-    	      	

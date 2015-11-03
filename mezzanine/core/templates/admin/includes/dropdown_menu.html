@@ -7,22 +7,9 @@
         <a href="#">{% trans app.name %}</a>
         <ul class="dropdown-menu-menu">
         {% for model in app.models %}
-	    <!-- frank edit-->
-            {% if model.name == '媒體庫' %}
-            <li{% if forloop.first %} class="first"{% endif %}><a
-                href="/moderna/upload/">上傳檔案</a></li>
-            {% else %}
-
-		<!-- frank edit-->
             {% if model.perms.add or model.perms.change or model.perms.custom %}
             <li{% if forloop.first %} class="first"{% endif %}><a
-                href="{{ model.admin_url }}{% if not model.perms.change and not model.perms.custom %}add/{% endif %}">{{ model.name }}</a></li>
-
-
-
-          {% endif %}<!-- frank edit-->
-
-
+                href="{% if not model.perms.change and not model.perms.custom %}{{ model.add_url }}{% else %}{{ model.admin_url }}{% endif %}">{{ model.name }}</a></li>
             {% endif %}
         {% endfor %}
         </ul>

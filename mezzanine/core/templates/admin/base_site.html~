@@ -5,8 +5,6 @@
 
 {% block extrahead %}
 <link rel="stylesheet" href="{% static "mezzanine/css/admin/global.css" %}">
-<link rel="stylesheet" href="{% static  'css/boyun.css' %}">
-
 <style>
     /* These are set in PageAdmin's view methods, and mezzanine.core.admin.SingletonAdmin */
     {% if hide_delete_link or singleton %}.submit-row .deletelink {display:none !important;}{% endif %}
@@ -26,8 +24,8 @@
     window.__admin_url = '{{ admin_index_url }}';
     window.__static_proxy = '{{ static_proxy_url }}';
     window.__admin_media_prefix__ = '{% static "admin" %}/';
-    window.__grappelli_installed = {{ settings.GRAPPELLI_INSTALLED|default:"true"|lower }};
-    window.__admin_menu_collapsed = {{ settings.ADMIN_MENU_COLLAPSED|default:"false"|lower }};
+    window.__grappelli_installed = {{ settings.GRAPPELLI_INSTALLED|lower }};
+    window.__admin_menu_collapsed = {{ settings.ADMIN_MENU_COLLAPSED|lower }};
     window.__language_code = '{{ LANGUAGE_CODE }}';
 </script>
 
@@ -35,10 +33,12 @@
 <script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
 {% endif %}
 
-
 <script>
 jQuery(function($) {
     $('.admin-title').click(function() {location = window.__admin_url;});
+    // This line can be removed after a decent amount of time has passed since
+    // https://github.com/stephenmcd/grappelli-safe/pull/56/files occurring.
+    $("#id_sitepermissions-__prefix__-sites").parent().parent().parent().remove();
 });
 </script>
 
@@ -55,9 +55,7 @@ jQuery(function($) {
 {% endif %}
 {% endblock %}
 
-
 {% block footer %}
-fsdfds
 {% if form.this_is_the_login_form %}
     <script src="{% static "mezzanine/js/admin/login.js" %}"></script>
 {% else %}
@@ -71,12 +69,8 @@ fsdfds
         <script src="{% static "mezzanine/js/admin/ajax_csrf.js" %}"></script>
         {% if settings.GRAPPELLI_INSTALLED %}
         <script src="{% static "mezzanine/js/admin/collapse_backport.js" %}"></script>
+                <script src="{% static "moderna/js/moderna/collapse_backport.js" %}"></script>
         {% endif %}
     {% endif %}
 {% endif %}
-<input id=selectFile type=file>
-<script src=https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js></script>
-<script src="{% static 'boyun/js/s3upload.js' %}"></script>
-<script src="{% static 'boyun/js/boyunAdmin.js' %}"></script>
-
 {% endblock %}

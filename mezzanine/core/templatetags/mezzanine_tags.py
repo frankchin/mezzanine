@@ -529,7 +529,6 @@ def admin_app_list(request):
     menu_order = {}
     for (group_index, group) in enumerate(settings.ADMIN_MENU_ORDER):
         group_title, items = group
-        group_title = group_title.title()
         for (item_index, item) in enumerate(items):
             if isinstance(item, (tuple, list)):
                 item_title, item = item
@@ -562,7 +561,7 @@ def admin_app_list(request):
                         menu_order[model_label]
                 except KeyError:
                     app_index = None
-                    app_title = opts.app_label.title()
+                    app_title = opts.app_config.verbose_name.title()
                     model_index = None
                     model_title = None
                 else:

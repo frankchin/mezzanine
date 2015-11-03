@@ -3,7 +3,7 @@ from future.builtins import str
 
 from copy import copy
 
-from django.contrib.contenttypes.generic import GenericRelation
+from django.contrib.contenttypes.fields import GenericRelation
 from django.core.exceptions import ImproperlyConfigured, AppRegistryNotReady
 from django.db.models import IntegerField, CharField, FloatField
 from django.db.models.signals import post_save, post_delete
@@ -113,7 +113,7 @@ class BaseGenericRelation(GenericRelation):
         ``related_items_changed`` handler.
         """
         for_model = kwargs["instance"].content_type.model_class()
-        if issubclass(for_model, self.model):
+        if for_model and issubclass(for_model, self.model):
             instance_id = kwargs["instance"].object_pk
             try:
                 instance = for_model.objects.get(id=instance_id)
